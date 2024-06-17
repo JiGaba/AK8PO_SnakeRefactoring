@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ak8PO_SnakeRefactoring
 {
-    public enum Direction
+    public class GameEngine
     {
-        Up,
-        Down,
-        Left,
-        Right
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ak8PO_SnakeRefactoring
 {
-    public enum ButtonPressedEnum
+    public enum ButtonPressed
     {
         Yes,
         No

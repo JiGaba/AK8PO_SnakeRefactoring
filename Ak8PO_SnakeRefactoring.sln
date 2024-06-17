@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ak8PO_SnakeRefactoring", "Ak8PO_SnakeRefactoring\Ak8PO_SnakeRefactoring.csproj", "{A6F6CC27-11AB-4A57-BA27-038370B37C2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6F6CC27-11AB-4A57-BA27-038370B37C2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F6CC27-11AB-4A57-BA27-038370B37C2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F6CC27-11AB-4A57-BA27-038370B37C2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F6CC27-11AB-4A57-BA27-038370B37C2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2027018C-E308-46F0-83CB-3DE791788C59}
+	EndGlobalSection
+EndGlobal

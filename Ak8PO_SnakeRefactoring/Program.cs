@@ -16,26 +16,26 @@ namespace Ak8PO_SnakeRefactoring
             int screenheight = Console.WindowHeight;
             Random randomnummer = new Random();
             int score = 5;
-            int gameover = 0;
+            bool gameover = false;
             Pixel hoofd = new Pixel(screenwidth / 2, screenheight / 2, ConsoleColor.Red);
             //hoofd.xpos = screenwidth / 2;
             //hoofd.ypos = screenheight / 2;
             //hoofd.schermkleur = ConsoleColor.Red;
             //string movement = "RIGHT";
-            Direction movement = Direction.Right;
+            DirectionEnum movement = DirectionEnum.Right;
             List<int> xposlijf = new List<int>();
             List<int> yposlijf = new List<int>();
             int berryx = randomnummer.Next(0, screenwidth);
             int berryy = randomnummer.Next(0, screenheight);
             DateTime tijd;// = DateTime.Now;
             DateTime tijd2;// = DateTime.Now;
-            string buttonpressed = "no";
+            ButtonPressedEnum buttonPressed;// = ButtonPressedEnum.No;
             while (true)
             {
                 Console.Clear();
                 if (hoofd.XPos == screenwidth - 1 || hoofd.XPos == 0 || hoofd.YPos == screenheight - 1 || hoofd.YPos == 0)
                 {
-                    gameover = 1;
+                    gameover = true;
                 }
                 for (int i = 0; i < screenwidth; i++)
                 {
@@ -68,12 +68,13 @@ namespace Ak8PO_SnakeRefactoring
                 {
                     Console.SetCursorPosition(xposlijf[i], yposlijf[i]);
                     Console.Write("■");
+
                     if (xposlijf[i] == hoofd.XPos && yposlijf[i] == hoofd.YPos)
                     {
-                        gameover = 1;
+                        gameover = true;
                     }
                 }
-                if (gameover == 1)
+                if (gameover)
                 {
                     break;
                 }
@@ -84,7 +85,7 @@ namespace Ak8PO_SnakeRefactoring
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("■");
                 tijd = DateTime.Now;
-                buttonpressed = "no";
+                buttonPressed = ButtonPressedEnum.No;
                 while (true)
                 {
                     tijd2 = DateTime.Now;
@@ -92,25 +93,25 @@ namespace Ak8PO_SnakeRefactoring
                     if (Console.KeyAvailable)
                     {
                         ConsoleKeyInfo toets = Console.ReadKey(true);
-                        if (toets.Key.Equals(ConsoleKey.UpArrow) && movement != Direction.Down && buttonpressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.UpArrow) && movement != DirectionEnum.Down && buttonPressed == ButtonPressedEnum.No)
                         {
-                            movement = Direction.Up;
-                            buttonpressed = "yes";
+                            movement = DirectionEnum.Up;
+                            buttonPressed = ButtonPressedEnum.Yes;
                         }
-                        if (toets.Key.Equals(ConsoleKey.DownArrow) && movement != Direction.Up && buttonpressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.DownArrow) && movement != DirectionEnum.Up && buttonPressed == ButtonPressedEnum.No)
                         {
-                            movement = Direction.Down;
-                            buttonpressed = "yes";
+                            movement = DirectionEnum.Down;
+                            buttonPressed = ButtonPressedEnum.Yes;
                         }
-                        if (toets.Key.Equals(ConsoleKey.LeftArrow) && movement != Direction.Right && buttonpressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.LeftArrow) && movement != DirectionEnum.Right && buttonPressed == ButtonPressedEnum.No)
                         {
-                            movement = Direction.Left;
-                            buttonpressed = "yes";
+                            movement = DirectionEnum.Left;
+                            buttonPressed = ButtonPressedEnum.Yes;
                         }
-                        if (toets.Key.Equals(ConsoleKey.RightArrow) && movement != Direction.Left && buttonpressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.RightArrow) && movement != DirectionEnum.Left && buttonPressed == ButtonPressedEnum.No)
                         {
-                            movement = Direction.Right;
-                            buttonpressed = "yes";
+                            movement = DirectionEnum.Right;
+                            buttonPressed = ButtonPressedEnum.Yes;
                         }
                     }
                 }
@@ -118,16 +119,16 @@ namespace Ak8PO_SnakeRefactoring
                 yposlijf.Add(hoofd.YPos);
                 switch (movement)
                 {
-                    case Direction.Up:
+                    case DirectionEnum.Up:
                         hoofd.YPos--;
                         break;
-                    case Direction.Down:
+                    case DirectionEnum.Down:
                         hoofd.YPos++;
                         break;
-                    case Direction.Left:
+                    case DirectionEnum.Left:
                         hoofd.XPos--;
                         break;
-                    case Direction.Right:
+                    case DirectionEnum.Right:
                         hoofd.XPos++;
                         break;
                 }

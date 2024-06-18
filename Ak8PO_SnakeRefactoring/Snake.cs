@@ -8,14 +8,19 @@ namespace Ak8PO_SnakeRefactoring
 {
     public class Snake
     {
+        public Pixel Head { get; set; }
+        public List<Pixel> Body { get; set; }
         private int _length;
-        public Point Head { get; set; }
-        public List<Point> Body { get; set; }
+        private int _screenWidth;
+        private int _screenHeight;
+
         public Snake(int initLength, int screenWidth, int screenHeight) 
         { 
             _length = initLength;
-            Body = new List<Point>();
-            Head = new Point(screenWidth / 2, screenHeight / 2, ConsoleColor.Red);
+            _screenWidth = screenWidth;
+            _screenHeight = screenHeight;   
+            Body = new List<Pixel>();
+            Head = new Pixel(screenWidth / 2, screenHeight / 2, ConsoleColor.Red);
         }
         public void IncreaseLength()
         {
@@ -26,9 +31,26 @@ namespace Ak8PO_SnakeRefactoring
             return Body.Count; 
         }
         
-        public void Add(Point p)
+        public void Increase()
         {
-            Body.Add(new Point(p.XPos, p.YPos, ConsoleColor.Magenta));
+            Body.Add(new Pixel(Head.XPos, Head.YPos, ConsoleColor.Green));
+        }
+
+        public bool IsCrashInto()
+        {
+            return Head.XPos == _screenWidth - 1 ||
+                    Head.XPos == 0 ||
+                    Head.YPos == _screenHeight - 1 ||
+                    Head.YPos == 0;
+        }
+        public bool IsFoodEaten(Pixel food)
+        {
+            return food.XPos == Head.XPos && food.YPos == Head.YPos;
+        }
+
+        public bool IsBitHimself(int index)
+        {
+            return Body[index].XPos == Head.XPos && Body[index].YPos == Head.YPos;
         }
         public void Move(Direction movement)
         {

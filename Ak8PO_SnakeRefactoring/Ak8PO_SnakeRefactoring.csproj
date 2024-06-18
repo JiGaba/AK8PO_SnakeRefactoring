@@ -45,10 +45,11 @@
   <ItemGroup>
     <Compile Include="ButtonPressedEnum.cs" />
     <Compile Include="DirectionEnum.cs" />
+    <Compile Include="Food.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="GameField.cs" />
     <Compile Include="GameTimer.cs" />
-    <Compile Include="Point.cs" />
+    <Compile Include="Pixel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Snake.cs" />

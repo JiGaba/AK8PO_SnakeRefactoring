@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace Ak8PO_SnakeRefactoring
 {
-    public class Pixel
+    public class Point
     {
-        public Pixel(int xPos, int yPos, ConsoleColor screenColor)
+        public int XPos { get; set; }
+        public int YPos { get; set; }
+        public ConsoleColor ScreenColor { get; set; }
+        public Point(int xPos, int yPos, ConsoleColor screenColor)
         {
             XPos = xPos;
             YPos = yPos;
             ScreenColor = screenColor;
         }
-
-        public int XPos { get; set; }
-        public int YPos { get; set; }
-        public ConsoleColor ScreenColor { get; set; }
     }
 }

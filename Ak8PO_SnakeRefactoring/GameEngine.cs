@@ -23,21 +23,22 @@ namespace Ak8PO_SnakeRefactoring
 
         public GameEngine() 
         {
-            _gameField = new GameField(_screenHeight, _screenWidth); 
-            _gameTimer = new GameTimer();
-            _randomGen = new Random();
-            _snake = new Snake();
             _score = 5;
             _gameOver = false;
             _movement = Direction.Right;
+
+            _gameField = new GameField(_screenHeight, _screenWidth); 
+            _gameTimer = new GameTimer();
+            _randomGen = new Random();
+            _snake = new Snake(_score, _screenWidth, _screenHeight);
         }
 
         public void Run()
         {
-            Point snakeHead = new Point(_screenWidth / 2, _screenHeight / 2, ConsoleColor.Red);
+            //Point snakeHead = new Point(_screenWidth / 2, _screenHeight / 2, ConsoleColor.Red);
             
-            List<int> xposlijf = new List<int>();
-            List<int> yposlijf = new List<int>();
+            //List<int> xposlijf = new List<int>();
+            //List<int> yposlijf = new List<int>();
             int berryx = _randomGen.Next(1, _screenWidth-1);
             int berryy = _randomGen.Next(1, _screenHeight-1);
             
@@ -48,31 +49,35 @@ namespace Ak8PO_SnakeRefactoring
             {
                 _gameField.ClearField(_screenWidth, _screenHeight);
 
-                if (snakeHead.XPos == _screenWidth - 1 || snakeHead.XPos == 0 || snakeHead.YPos == _screenHeight - 1 || snakeHead.YPos == 0)
+                if (_snake.Head.XPos == _screenWidth - 1 || _snake.Head.XPos == 0 || _snake.Head.YPos == _screenHeight - 1 || _snake.Head.YPos == 0)
                 {
                     _gameOver = true;
                 }
                 Console.ForegroundColor = ConsoleColor.Green;
-                if (berryx == snakeHead.XPos && berryy == snakeHead.YPos)
+                if (berryx == _snake.Head.XPos && berryy == _snake.Head.YPos)
                 {
                     _score++;
+                    _snake.IncreaseLength();
                     berryx = _randomGen.Next(1, _screenWidth - 2);
                     berryy = _randomGen.Next(1, _screenHeight - 2);
                 }
-                for (int i = 0; i < xposlijf.Count(); i++)
+                //for (int i = 0; i < xposlijf.Count(); i++)
+                for (int i = 0; i < _snake.Length(); i++)
                 {
-                    Console.SetCursorPosition(xposlijf[i], yposlijf[i]);
+                    //Console.SetCursorPosition(xposlijf[i], yposlijf[i]);
+                    Console.SetCursorPosition(_snake.Body[i].XPos, _snake.Body[i].YPos);
                     Console.Write("■");
 
-                    if (xposlijf[i] == snakeHead.XPos && yposlijf[i] == snakeHead.YPos)
+                    //if (xposlijf[i] == snakeHead.XPos && yposlijf[i] == snakeHead.YPos)
+                    if (_snake.Body[i].XPos == _snake.Head.XPos && _snake.Body[i].YPos == _snake.Head.YPos)
                     {
                         _gameOver = true;
                     }
                 }
                 if (_gameOver) break;
 
-                Console.SetCursorPosition(snakeHead.XPos, snakeHead.YPos);
-                Console.ForegroundColor = snakeHead.ScreenColor;
+                Console.SetCursorPosition(_snake.Head.XPos, _snake.Head.YPos);
+                Console.ForegroundColor = _snake.Head.ScreenColor;
                 Console.Write("■");
                 Console.SetCursorPosition(berryx, berryy);
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -109,39 +114,24 @@ namespace Ak8PO_SnakeRefactoring
                         }
                     }
                 }
-                xposlijf.Add(snakeHead.XPos);
-                yposlijf.Add(snakeHead.YPos);
+                _snake.Add(_snake.Head);
+                //yposlijf.Add(snakeHead.YPos);
 
-                SnakeMove(snakeHead);
+                _snake.Move(_movement);
+                /*
 
                 // remove tail
-                if (xposlijf.Count() > _score)
+                if (_snake.Length() > _score)
                 {
-                    xposlijf.RemoveAt(0);
-                    yposlijf.RemoveAt(0);
+                    _snake.Body.RemoveAt(0);
+                    //yposlijf.RemoveAt(0);
                 }
+                */
             }
 
             _gameField.GameOverMessage(_screenHeight, _screenWidth, _score);
         }
 
-        private void SnakeMove(Point snakeHead)
-        {
-            switch (_movement)
-            {
-                case Direction.Up:
-                    snakeHead.YPos--;
-                    break;
-                case Direction.Down:
-                    snakeHead.YPos++;
-                    break;
-                case Direction.Left:
-                    snakeHead.XPos--;
-                    break;
-                case Direction.Right:
-                    snakeHead.XPos++;
-                    break;
-            }
-        }
+        
     }
 }

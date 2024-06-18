@@ -6,20 +6,23 @@ using System.Threading.Tasks;
 
 namespace Ak8PO_SnakeRefactoring
 {
-    public class Food
+    public class Food : IFood
     {
         public Pixel Position { get; set; }
 
         private readonly Random _randomGenerator;
         private int _screenHeight;
         private int _screenWidth;
+
         public Food(int screenWidth, int screenHeight)
         {
             _screenHeight = screenHeight;
             _screenWidth = screenWidth;
             _randomGenerator = new Random();
+
             NextPosition();
         }
+
         public void NextPosition()
         {
             Position = new Pixel(

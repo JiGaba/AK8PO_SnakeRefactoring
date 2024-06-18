@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace Ak8PO_SnakeRefactoring
 {
-    public class GameTimer
+    public class GameTimer : IGameTimer
     {
         private DateTime _timeMainLoop;
         private DateTime _timeByKeyLoop;
+
         public GameTimer() { }
-        public void MainLoopReset()
+
+        public void ResetMainLoop()
         {
             _timeMainLoop = DateTime.Now;
         }
-        public void KeyLoopReset()
+        public void ResetKeyLoop()
         {
             _timeByKeyLoop = DateTime.Now;
         }
-        public bool TimeExpired()
+        public bool IsTimeExpired()
         {
             return _timeByKeyLoop.Subtract(_timeMainLoop).TotalMilliseconds > 500;
         }

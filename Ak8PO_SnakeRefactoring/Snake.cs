@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ak8PO_SnakeRefactoring
 {
-    public class Snake
+    public class Snake : ISnake
     {
         public Pixel Head { get; set; }
         public List<Pixel> Body { get; set; }
@@ -22,10 +22,12 @@ namespace Ak8PO_SnakeRefactoring
             Body = new List<Pixel>();
             Head = new Pixel(screenWidth / 2, screenHeight / 2, ConsoleColor.Red);
         }
-        public void IncreaseLength()
+
+        public void IncreasePixels()
         {
             _length++;
         }
+
         public int Length()
         {
             return Body.Count; 
@@ -43,15 +45,18 @@ namespace Ak8PO_SnakeRefactoring
                     Head.YPos == _screenHeight - 1 ||
                     Head.YPos == 0;
         }
+
         public bool IsFoodEaten(Pixel food)
         {
             return food.XPos == Head.XPos && food.YPos == Head.YPos;
         }
 
+
         public bool IsBitHimself(int index)
         {
             return Body[index].XPos == Head.XPos && Body[index].YPos == Head.YPos;
         }
+
         public void Move(Direction movement)
         {
             switch (movement)

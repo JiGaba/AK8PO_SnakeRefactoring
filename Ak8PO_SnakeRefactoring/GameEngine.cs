@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Ak8PO_SnakeRefactoring
 {
-    public class GameEngine
+    public class GameEngine : IGameEngine
     {
         private const int _screenHeight = 16;
         private const int _screenWidth = 32;
 
-        private readonly GameField _gameField;
-        private readonly GameTimer _gameTimer;
-        private readonly Snake _snake;
-        private readonly Food _food;
+        private readonly IGameField _gameField;
+        private readonly IGameTimer _gameTimer;
+        private readonly ISnake _snake;
+        private readonly IFood _food;
 
         private ButtonPressed _buttonPressed;
         private Direction _movement;
@@ -42,7 +42,9 @@ namespace Ak8PO_SnakeRefactoring
 
                 if (_snake.IsCrashInto()) _gameOver = true;
                 if (_snake.IsFoodEaten(_food.Position)) FoodIsEaten();
+
                 ShowSnakePosition();
+
                 if (_gameOver) break;
 
                 _gameField.DrawPixel(_snake.Head);
@@ -56,12 +58,14 @@ namespace Ak8PO_SnakeRefactoring
 
             _gameField.GameOverMessage(_screenHeight, _screenWidth, _score);
         }
+
         private void FoodIsEaten()
         {
             _score++;
-            _snake.IncreaseLength();
+            _snake.IncreasePixels();
             _food.NextPosition();
         }
+
         private void ShowSnakePosition()
         {
             for (int i = 0; i < _snake.Length(); i++)
@@ -74,13 +78,13 @@ namespace Ak8PO_SnakeRefactoring
 
         private void ReadKeyLoop()
         {
-            _gameTimer.MainLoopReset();
+            _gameTimer.ResetMainLoop();
             _buttonPressed = ButtonPressed.No;
 
             while (true)
             {
-                _gameTimer.KeyLoopReset();
-                if (_gameTimer.TimeExpired()) break;
+                _gameTimer.ResetKeyLoop();
+                if (_gameTimer.IsTimeExpired()) break;
 
                 ReadKey();
             }
@@ -91,22 +95,18 @@ namespace Ak8PO_SnakeRefactoring
             if (Console.KeyAvailable)
             {
                 ConsoleKeyInfo key = Console.ReadKey(true);
+
                 if (key.Key.Equals(ConsoleKey.UpArrow) && _movement != Direction.Down && _buttonPressed == ButtonPressed.No)
-                {
                     SetupDirection(Direction.Up);
-                }
+
                 if (key.Key.Equals(ConsoleKey.DownArrow) && _movement != Direction.Up && _buttonPressed == ButtonPressed.No)
-                {
                     SetupDirection(Direction.Down);
-                }
+                
                 if (key.Key.Equals(ConsoleKey.LeftArrow) && _movement != Direction.Right && _buttonPressed == ButtonPressed.No)
-                {
                     SetupDirection(Direction.Left);
-                }
+
                 if (key.Key.Equals(ConsoleKey.RightArrow) && _movement != Direction.Left && _buttonPressed == ButtonPressed.No)
-                {
                     SetupDirection(Direction.Right);
-                }
             }
         }
 

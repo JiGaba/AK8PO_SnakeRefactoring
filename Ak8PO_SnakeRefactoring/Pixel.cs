@@ -11,6 +11,7 @@ namespace Ak8PO_SnakeRefactoring
         public int XPos { get; set; }
         public int YPos { get; set; }
         public ConsoleColor ScreenColor { get; set; }
+
         public Pixel(int xPos, int yPos, ConsoleColor screenColor)
         {
             XPos = xPos;

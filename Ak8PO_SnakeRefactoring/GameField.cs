@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ak8PO_SnakeRefactoring
 {
-    public class GameField
+    public class GameField : IGameField
     {
-        public const string _squere = "■";
+        public const string _square = "■";
+
         public GameField(int screenHeight, int screenWidth) 
         {
             Console.WindowHeight = screenHeight;
@@ -42,7 +43,7 @@ namespace Ak8PO_SnakeRefactoring
         {
             Console.SetCursorPosition(pixel.XPos, pixel.YPos);
             Console.ForegroundColor = pixel.ScreenColor;
-            Console.Write(_squere);
+            Console.Write(_square);
         }
 
         public void GameOverMessage(int screenHeight, int screenWidth, int score)
@@ -54,14 +55,13 @@ namespace Ak8PO_SnakeRefactoring
 
         private void DrawHorizontalBar(int screenWidth, int screenHeight)
         {
-            var horizontalBar = string.Join("", new byte[screenWidth].Select(b => "■").ToArray());
+            var horizontalBar = string.Join("", new byte[screenWidth].Select(b => _square).ToArray());
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.SetCursorPosition(0, 0);
             Console.Write(horizontalBar);
             Console.SetCursorPosition(0, screenHeight - 1);
             Console.Write(horizontalBar);
-
         }
     }
 }

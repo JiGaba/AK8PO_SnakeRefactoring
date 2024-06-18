@@ -49,6 +49,11 @@
     <Compile Include="GameEngine.cs" />
     <Compile Include="GameField.cs" />
     <Compile Include="GameTimer.cs" />
+    <Compile Include="IFood.cs" />
+    <Compile Include="IGameEngine.cs" />
+    <Compile Include="IGameField.cs" />
+    <Compile Include="IGameTimer.cs" />
+    <Compile Include="ISnake.cs" />
     <Compile Include="Pixel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

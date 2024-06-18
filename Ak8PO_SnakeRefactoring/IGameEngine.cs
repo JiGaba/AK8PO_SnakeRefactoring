@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ak8PO_SnakeRefactoring
 {
-    internal class Program
+    public interface IGameEngine
     {
-        static void Main(string[] args)
-        {
-            IGameEngine game = new GameEngine();
-            game.Run();
-        }
+        void Run();
     }
 }
